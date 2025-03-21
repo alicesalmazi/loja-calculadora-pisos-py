@@ -11,8 +11,13 @@ def verificadorEntrada(mensagem):
 def calcularPisos(larguraSala, comprimentoSala, larguraPiso, tamanhoPiso):
     areaSala = larguraSala * comprimentoSala
     areaPiso = larguraPiso * tamanhoPiso
-    qntPisos = areaSala / areaPiso
-    return qntPisos
+    qntPisos = (areaSala // areaPiso)
+    return int(qntPisos)
+
+def calcularPisosComPorcentual(margemErro, qntPisos):
+    porcentual = (1 + margemErro/100)
+    qntPisosComMargem = qntPisos * porcentual
+    return int(qntPisosComMargem)
 
 def chamaDeNovo():
     os.system('Cls')
@@ -34,10 +39,12 @@ def exe():
     comprimentoSala = verificadorEntrada("Digite o comprimento da sala: ")
     larguraPiso = verificadorEntrada("Digite a largura do piso: ")
     tamanhoPiso = verificadorEntrada("Digite o tamanho do piso: ")
+    margemErro = verificadorEntrada("Qual a porcentagem de pisos a mais que você gostaria de comprar: ")
 
     qntPisos = calcularPisos(larguraSala, comprimentoSala, larguraPiso, tamanhoPiso)
+    qntPisosComMargem = calcularPisosComPorcentual(margemErro, qntPisos)
 
-    print(f"A quantidade de pisos utilizados será {int(qntPisos)}.")
+    print(f"Você vai precisar de {qntPisos} pisos, com margem de erro {qntPisosComMargem}.")
 
     if int(qntPisos) == 0:
         resposta = str(input("Vixi, a conta não bateu... Será que as medidas estão corretas? \n Deseja digitar novamente as medidas? [S] ou [N]: ")).upper()
